@@ -49,24 +49,59 @@ export class SecurityService {
    * @param username
    * @param password 
    */
-  jwtToken:any;
-  userId:number;
-  updateCredentials(user:userdetails) {
-    // this.authToken = btoa(username + ':' + password);
-    this.http.post('/authenticate',user,{}).subscribe((res) => {
-      console.log('print ressss'+res)
-      this.jwtToken=res.jwt;
-      this.userId=res.userID;
-      console.log('layer 1 '+this.jwtToken)
-      console.log('layer 2'+this.userId)
-      this.isLoggedIn=true;
-      this.router.navigate(['/dashboard']);
-      
-    }, () => {
-      this.router.navigate(['/home']);
-    });
+  // jwtToken:any;
+  id:number;
+  jwt:any;
+  details:any;
 
-  }
+  // updateCredentials(user:userdetails) {
+  //   // this.authToken = btoa(username + ':' + password);
+  //   this.http.post('/authenticate',user,{}).subscribe((res) => {
+  //     console.log('print ressss'+res)
+  //     // this.jwtToken=res.jwt;
+  //     // this.userId=res.userID;
+  //       //  this.jwt=res.jwt;
+  //       //  this.id=res.id;
+  //       this.details=res;
+  //       console.log(res);
+  //     // console.log('layer 1 '+this.jwtToken)
+  //     // console.log('layer 2'+this.userId)
+  //     this.isLoggedIn=true;
+  //     this.router.navigate(['/dashboard']);
+      
+  //   }, () => {
+  //     this.router.navigate(['/home']);
+  //   });
+
+  // }
+
+  updateCredentials(user:userdetails) {
+      // this.authToken = btoa(username + ':' + password);
+      this.http.post('/authenticate',user,{}).subscribe((res => {
+        console.log('print ressss'+res)
+        // this.jwtToken=res.jwt;
+        // this.userId=res.userID;
+          //  this.jwt=res.jwt;
+          //  this.id=res.id;
+          this.details=res;
+          console.log(res);
+        // console.log('layer 1 '+this.jwtToken)
+        // console.log('layer 2'+this.userId)
+        this.isLoggedIn=true;
+        this.router.navigate(['/dashboard']);
+        
+      }), () => {
+        this.router.navigate(['/home']);
+      });
+  
+    }
+  
+
+
+  
+
+
+
 
  registration(user:userregister) {
   this.http.post('/register',user,{}).subscribe((res) => {

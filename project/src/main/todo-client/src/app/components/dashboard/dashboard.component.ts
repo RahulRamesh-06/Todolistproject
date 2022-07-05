@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     this.masterService.getToDoList().subscribe((res) => {
       this.listItems = res;
       this.toastrService.success('List fetched successfully');
-    }, err => this.toastrService.error(err.message ? err.message : err));
+    });
   }
   
   /**
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
    */
   addItem(itemName: string, itemDescription: string){
     this.addedItems.push({
-      userId: this.securityService.userId,
+      userId: this.securityService.details.userID,
       task:itemName,
       description: itemDescription,
       isChecked: false,

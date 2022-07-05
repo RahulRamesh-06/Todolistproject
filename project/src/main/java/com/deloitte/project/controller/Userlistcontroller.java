@@ -52,7 +52,7 @@ public class Userlistcontroller {
     Posting the task
     */
 
-    @PostMapping("/saveTodoList")
+    @PostMapping("api/saveTodoList")
     public  ResponseEntity<Todolist> saveList(@RequestBody List<Todolist> list){
         return new ResponseEntity<Todolist>(userlistService.saveList(list),HttpStatus.CREATED);
     }
@@ -75,17 +75,17 @@ public class Userlistcontroller {
     }
 
 
-    @GetMapping("/getTodoList/{id}")
+    @GetMapping("api/getTodoList/{id}")
     public ResponseEntity<List> getJobsById(@PathVariable("id") long id) throws Exception{
         return new ResponseEntity<List>(userlistService.getJobById(id),HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/updateTodoList/{id}")
+    @PostMapping("api/updateTodoList/{id}")
     public ResponseEntity<Todolist> updateJobs(@RequestBody Todolist list, @PathVariable("id") long id) throws Exception{
 //        list.setUserId(id);
         return new ResponseEntity<Todolist>(userlistService.updateJob(list,id),HttpStatus.ACCEPTED);
     }
-    @DeleteMapping("/deleteTodoListT/{id}")
+    @DeleteMapping("api/deleteTodoListT/{id}")
     public ResponseEntity<?> deleteTodo( @PathVariable("id") long id) throws Exception{
         return  ResponseEntity.ok(HttpStatus.OK);
     }

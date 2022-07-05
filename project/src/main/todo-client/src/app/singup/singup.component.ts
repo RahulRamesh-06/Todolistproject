@@ -14,6 +14,10 @@ export class SingupComponent implements OnInit {
 
   constructor(private securityService: SecurityService) { }
 
+
+  username: string = null;
+  password: string = null;
+
   ngOnInit() {
   }
   user:userregister={

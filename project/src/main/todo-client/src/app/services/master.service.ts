@@ -15,7 +15,7 @@ export class MasterService {
     const httpOptions2 ={
       headers:new HttpHeaders({
         'Content-type':'application/json',
-        'Authorization' : 'Bearer '+this.Security.jwtToken,
+        'Authorization' : 'Bearer '+this.Security.jwt,
       })
     }
     return this.http.delete('/deleteTodoList/'+taskId,httpOptions2);
@@ -33,10 +33,10 @@ export class MasterService {
     const httpOptions1 ={
       headers:new HttpHeaders({
         'Content-type':'application/json',
-        'Authorization' : 'Bearer '+this.Security.jwtToken,
+        'Authorization' : 'Bearer '+this.Security.details.jwt,
       })
     }
-    return this.http.get('/getTodoList/'+this.Security.userId,httpOptions1);
+    return this.http.get('api/getTodoList/'+this.Security.details.userID,httpOptions1);
   }
 
   /**
@@ -49,18 +49,18 @@ export class MasterService {
     const httpOptions ={
       headers:new HttpHeaders({
         'Content-type':'application/json',
-        'Authorization' : 'Bearer '+this.Security.jwtToken,
+        'Authorization' : 'Bearer '+this.Security.details.jwt,
       })
     }
     console.log(httpOptions)
-    return this.http.post('/saveTodoList',data ,httpOptions)
+    return this.http.post('api/saveTodoList',data ,httpOptions)
   };
 
 
   getCustomHeaders(): HttpHeaders {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
-      .set('Authorization', 'Bearer '+this.Security.jwtToken);
+      .set('Authorization', 'Bearer '+this.Security.details.jwt);
     return headers;
   }
 
