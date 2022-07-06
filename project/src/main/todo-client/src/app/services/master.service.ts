@@ -7,6 +7,8 @@ import { SecurityService } from './security/security.service';
   providedIn: 'root'
 })
 export class MasterService {
+  
+  
 
 
 
@@ -15,10 +17,10 @@ export class MasterService {
     const httpOptions2 ={
       headers:new HttpHeaders({
         'Content-type':'application/json',
-        'Authorization' : 'Bearer '+this.Security.jwt,
+        'Authorization' : 'Bearer '+this.Security.details.jwt,
       })
     }
-    return this.http.delete('/deleteTodoList/'+taskId,httpOptions2);
+    return this.http.delete('/api/deleteTodoListT/'+taskId,httpOptions2);
   }
 
   constructor(private http: HttpClient,private Security:SecurityService) { }
@@ -62,6 +64,19 @@ export class MasterService {
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Bearer '+this.Security.details.jwt);
     return headers;
+  }
+
+  updateTodoList(values: Array<any>,id:number):Observable<any> {
+
+    const httpOptions ={
+      headers:new HttpHeaders({
+        'Content-type':'application/json',
+        'Authorization' : 'Bearer '+this.Security.details.jwt,
+      })
+    }
+    console.log(httpOptions)
+    return this.http.post('api/updateTodoList/'+id,values ,httpOptions)
+    
   }
 
 
