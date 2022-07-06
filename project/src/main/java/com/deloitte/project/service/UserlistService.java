@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +33,15 @@ public class UserlistService {
      */
 
     public Todolist saveList(List<Todolist> list) {
-         list.forEach(e-> todolistrepository.save(e));
-         return null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        for(int i=0;i<=list.size();i++) {
+            list.get(i).setlastUpdatedTime(String.valueOf(now));
+            list.get(i).setlastUpdatedBy(String.valueOf(now));
+            list.forEach(e -> todolistrepository.save(e));
+            return null;
+        }
+        return null;
 
     }
 
@@ -41,13 +51,17 @@ public class UserlistService {
      * Get Job By id from H2 DB
      */
     public List<Todolist> getJobById(long id) throws Exception {
-        List<Todolist> taskNew = todolistrepository.findAllTasks(id);
-        if(taskNew.isEmpty()) {
-            throw new Exception("Resource Not Found!!!!");
-        }else {
-            return taskNew;
-        }
 
+        List<Todolist> taskNew = todolistrepository.findAllTasks(id);
+        for(int i=0;i<taskNew.size();i++) {
+            System.out.println(taskNew.get(0).getTaskId());
+            if (taskNew.isEmpty()) {
+                throw new Exception("Resource Not Found!!!!");
+            } else {
+                return taskNew;
+            }
+        }
+        return taskNew;
     }
 
     public void deleteTask(long id) throws Exception {
@@ -55,23 +69,26 @@ public class UserlistService {
     }
 
 
-    public Todolist updateJob(Todolist List,long taskID) throws Exception {
-        Optional<Todolist> newTask= todolistrepository.findByUserId(List.getuserId(),taskID);
-        if(!newTask.isPresent()) {
-            throw new Exception("Resource Not Found!!!!");
+    public Todolist updateJob(List<Todolist> List,long taskID) throws Exception {
 
-        }else {
-            Todolist todolist2 = newTask.get();
-            todolist2.setUserId(List.getuserId());
-            todolist2.setDescription(List.getdescription());
-            todolist2.setTask(List.getTask());
-            todolist2.setisChecked(List.getisChecked());
-            todolist2.setlastUpdatedBy(List.getlastUpdatedBy());
-            todolist2.setlastUpdatedTime(List.getlastUpdatedTime());
-            todolistrepository.save(todolist2);
-            return todolist2;
+        LocalDateTime now = LocalDateTime.now();
+            for (int i = 0 ;i <= List.size(); i++) {
+                Optional<Todolist> newTask = todolistrepository.findByUserId(List.get(i).getuserId(), taskID);
+                if (!newTask.isPresent()) {
+                    throw new Exception("Resource Not Found!!!!");
+
+                } else {
+                      todolistrepository.updateForIschecked(List.get(i).getisChecked(),String.valueOf(now),taskID);
+//                    Todolist todolist2 = newTask.get();
+//                    List<Todolist> list = new ArrayList<>();
+//                    list.add(new Todolist(taskID, List.get(i).getisChecked(), String.valueOf(now)));
+//                    list.forEach(e -> todolistrepository.save(e));
+                    return null;
+                }
+            }
+        return null;
         }
 
     }
 
-}
+

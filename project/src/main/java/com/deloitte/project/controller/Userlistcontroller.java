@@ -54,6 +54,7 @@ public class Userlistcontroller {
 
     @PostMapping("api/saveTodoList")
     public  ResponseEntity<Todolist> saveList(@RequestBody List<Todolist> list){
+
         return new ResponseEntity<Todolist>(userlistService.saveList(list),HttpStatus.CREATED);
     }
 
@@ -81,12 +82,13 @@ public class Userlistcontroller {
     }
 
     @PostMapping("api/updateTodoList/{id}")
-    public ResponseEntity<Todolist> updateJobs(@RequestBody Todolist list, @PathVariable("id") long id) throws Exception{
+    public ResponseEntity<Todolist> updateJobs(@RequestBody List<Todolist> list, @PathVariable("id") long id) throws Exception{
 //        list.setUserId(id);
         return new ResponseEntity<Todolist>(userlistService.updateJob(list,id),HttpStatus.ACCEPTED);
     }
     @DeleteMapping("api/deleteTodoListT/{id}")
     public ResponseEntity<?> deleteTodo( @PathVariable("id") long id) throws Exception{
+        userlistService.deleteTask(id);
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -94,7 +96,10 @@ public class Userlistcontroller {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody Authenticationrequest user) throws Exception {
-        return ResponseEntity.ok(authservice.save(user));
+        if (!authservice.isUserExists(user)) {
+            return ResponseEntity.ok(authservice.save(user));
+        }
+        return ResponseEntity.ok("User Already Exists");
     }
 
 //    private void authenticate(String username, String password) throws Exception {

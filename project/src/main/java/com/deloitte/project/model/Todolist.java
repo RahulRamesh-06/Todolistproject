@@ -70,4 +70,23 @@ public class Todolist {
     public void setlastUpdatedTime(String lastUpdatedTime) {
         this.lastUpdatedTime=lastUpdatedTime;
     }
+
+
+    public Todolist(long taskId,long userId,String task,String description,boolean isChecked,String lastUpdatedBy, String lastUpdatedTime) {
+        this.userId=userId;
+        this.taskId=taskId;
+        this.task=task;
+        this.description=description;
+        this.isChecked=isChecked;
+        this.lastUpdatedBy=lastUpdatedBy;
+        this.lastUpdatedTime=lastUpdatedTime;
+    }
+    public Todolist(long taskId,boolean isChecked,String lastUpdatedTime) {
+        this.taskId=taskId;
+        this.isChecked=isChecked;
+        this.lastUpdatedTime=lastUpdatedTime;
+    }
+    public Todolist() {
+
+    }
 }
