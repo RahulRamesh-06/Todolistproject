@@ -41,4 +41,4 @@ Client side (Angular) Dev Setup:
 
 
 
-Note: After npm run-script build is run, if you run ./gradlew clean build all the client folders will serve as a client from the resources folder in the applicaiton.
+Note: After npm run-script build is run, if you run ./gradlew clean build all the client folders will serve as from the resources/static folder in the applicaiton.
