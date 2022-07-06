@@ -14,6 +14,13 @@ import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  For the sole purpose of authentication
+ *
+ * @author Rahul Ramesh
+ *
+ */
+
 @Service
 
 public class Authservice implements UserDetailsService {

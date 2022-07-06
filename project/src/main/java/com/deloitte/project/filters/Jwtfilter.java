@@ -16,6 +16,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+
+/**
+ *  JWT filter class for addtional configuration in authenticating the apis's using JWT.
+ *
+ * @author Rahul Ramesh
+ *
+ */
+
 @Component
 public class Jwtfilter extends OncePerRequestFilter {
 

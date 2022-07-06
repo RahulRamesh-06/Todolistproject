@@ -21,6 +21,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ *  REST controller class.
+ *
+ * @author Rahul Ramesh
+ *
+ */
+
 @RestController
 public class Userlistcontroller {
 

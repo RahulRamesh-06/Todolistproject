@@ -30,7 +30,12 @@ public class Securityconfig extends WebSecurityConfigurerAdapter {
     Jwtfilter jwtFilter;
 
 
-
+    /**
+     *  Security Implementation
+     *
+     * @author Rahul Ramesh
+     *
+     */
 
     @Override
     protected void configure (AuthenticationManagerBuilder auth) throws Exception {
